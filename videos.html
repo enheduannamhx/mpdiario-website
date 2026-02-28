@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vídeos - MP Diário</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Source+Serif+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Newspaper Color Palette - Vintage 90s */
+        :root {
+            --bg-paper: #F5F2E8;
+            --bg-cream: #EDE8D5;
+            --text-primary: #1a1c1a;
+            --text-secondary: #4a4a4a;
+            --title-brown: #2d2418;
+            --accent-red: #8b0000;
+            --accent-gold: #B8860B;
+            --border-dark: #2d2418;
+            --column-line: #c4b8a8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Source Serif 3', Georgia, serif;
+            background: var(--bg-paper);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        /* Header - Masthead */
+        .masthead {
+            text-align: center;
+            padding: 25px 0;
+            border-bottom: 3px double var(--border-dark);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .date-line {
+            font-family: 'Source Serif 3', serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--column-line);
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+        }
+
+        .newspaper-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 52px;
+            font-weight: 900;
+            color: var(--title-brown);
+            letter-spacing: -1px;
+            line-height: 1;
+            text-transform: uppercase;
+        }
+
+        .newspaper-title span {
+            color: var(--accent-red);
+        }
+
+        .newspaper-title a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .edition-line {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+        }
+
+        /* Back Button */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--accent-red);
+            text-decoration: none;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Page Title */
+        .page-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--title-brown);
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--column-line);
+            padding-bottom: 15px;
+        }
+
+        .page-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        /* Videos Grid */
+        .videos-grid {
+            display: grid;
+            gap: 25px;
+        }
+
+        .video-card {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 20px;
+            padding: 20px;
+            background: var(--bg-cream);
+            border: 1px solid var(--column-line);
+        }
+
+        .video-thumb {
+            position: relative;
+            aspect-ratio: 16/9;
+            background: #333;
+            overflow: hidden;
+        }
+
+        .video-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-duration {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 2px 6px;
+            font-size: 11px;
+            border-radius: 2px;
+        }
+
+        .video-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            margin-bottom: 5px;
+        }
+
+        .video-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--title-brown);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .video-date {
+            font-size: 11px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .video-summary {
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text-primary);
+            flex-grow: 1;
+        }
+
+        .video-links {
+            margin-top: 12px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .video-btn {
+            font-family: 'Source Serif 3', serif;
+            padding: 8px 16px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            border: 1px solid var(--border-dark);
+            transition: all 0.3s ease;
+        }
+
+        .video-btn-primary {
+            background: var(--title-brown);
+            color: white;
+        }
+
+        .video-btn-primary:hover {
+            background: var(--accent-red);
+            border-color: var(--accent-red);
+        }
+
+        .video-btn-secondary {
+            background: transparent;
+            color: var(--title-brown);
+        }
+
+        .video-btn-secondary:hover {
+            background: white;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 3px double var(--border-dark);
+            text-align: center;
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .video-card {
+                grid-template-columns: 1fr;
+            }
+            .newspaper-title {
+                font-size: 36px;
+            }
+            .page-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Masthead -->
+        <header class="masthead">
+            <div class="date-line">São Paulo, 28 de fevereiro de 2026 • Ano I</div>
+            <h1 class="newspaper-title"><a href="index.html">MP <span>Diário</span></a></h1>
+            <div class="edition-line">Portal de Informações Jurídicas</div>
+        </header>
+
+        <!-- Back Link -->
+        <a href="index.html" class="back-link">← Voltar para a-home</a>
+
+        <!-- Page Title -->
+        <h2 class="page-title">Vídeos do Canal</h2>
+        <p class="page-subtitle">Assista aos vídeos do canal Diário MP sobre temas jurídicos importantes</p>
+
+        <!-- Videos Grid -->
+        <div class="videos-grid">
+            <!-- Video 1 -->
+            <article class="video-card">
+                <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/jzyXcOgv7cI/maxresdefault.jpg" alt="Medidas Atípicas Tema 1137, STJ" onerror="this.src='https://img.youtube.com/vi/jzyXcOgv7cI/sddefault.jpg'">
+                </div>
+                <div class="video-content">
+                    <span class="video-number">01</span>
+                    <h3 class="video-title">Medidas Atípicas Tema 1137, STJ</h3>
+                    <span class="video-date">12 de fevereiro de 2026</span>
+                    <p class="video-summary">O tema 1.137 do STJ estabelece os critérios objetivos para aplicação de medidas executivas atípicas na execução civil. Diante do problema dos devedores contumazes que ocultam patrimônio, o CPC/2015 criou o artigo 139, IV, permitindo ao juiz determinar medidas indutivas, coercitivas, mandamentais ou subrogatórias necessárias. O STJ definiu quatro requisitos cumulativos: 1) Subsidariedade - último recurso após medidas tradicionais; 2) Fundamentação detalhada; 3) Direito de manifestação prévia do devedor; 4) Proporcionalidade.</p>
+                    <div class="video-links">
+                        <a href="https://www.youtube.com/watch?v=jzyXcOgv7cI" target="_blank" class="video-btn video-btn-primary">Assistir no YouTube</a>
+                        <a href="https://docs.google.com/document/d/1NBULD3w6ThGPS6ZieztTq7L1q7IQod9Q5nAekHl1zV4/edit" target="_blank" class="video-btn video-btn-secondary">Ver Transcrição</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Video 2 -->
+            <article class="video-card">
+                <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/he7HYVSMiBE/maxresdefault.jpg" alt="O Processo Estrutural" onerror="this.src='https://img.youtube.com/vi/he7HYVSMiBE/sddefault.jpg'">
+                </div>
+                <div class="video-content">
+                    <span class="video-number">02</span>
+                    <h3 class="video-title">O Processo Estrutural</h3>
+                    <span class="video-date">13 de fevereiro de 2026</span>
+                    <p class="video-summary">Processo estrutural é ação judicial que reorganiza políticas públicas e instituições para resolver problemas sistêmicos (superlotação presídios, desmatamento). Origem: Suprema Corte EUA 1954 (luta direitos civis), evoluiu na Colômbia e chegou ao Brasil. Características: tutela de direitos difusos/coletivos, provimento mandamental, competência do STF, legitimação ampla, vedação ao non liquet, proporcionalidade, plurinacionalidade, temporalidade. Diferencia-se do estado de coisas inconstitucional.</p>
+                    <div class="video-links">
+                        <a href="https://www.youtube.com/watch?v=he7HYVSMiBE" target="_blank" class="video-btn video-btn-primary">Assistir no YouTube</a>
+                        <a href="https://docs.google.com/document/d/1HZ7WUm-zFtaql4VnfpR-onGahv6vMYf9DUaIC2DiNWQ/edit" target="_blank" class="video-btn video-btn-secondary">Ver Transcrição</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Video 3 -->
+            <article class="video-card">
+                <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/K32KqJiFTP4/maxresdefault.jpg" alt="Tutela Jurisdicional Diferenciada" onerror="this.src='https://img.youtube.com/vi/K32KqJiFTP4/sddefault.jpg'">
+                </div>
+                <div class="video-content">
+                    <span class="video-number">03</span>
+                    <h3 class="video-title">Tutela Jurisdicional Diferenciada</h3>
+                    <span class="video-date">14 de fevereiro de 2026</span>
+                    <p class="video-summary">Tutela jurisdicional diferenciada para casos que fogem do padrão binário. Order licensing é decisão interlocutória que antecipa efeitos da tutela final (tutela de urgência). O CPC brasileiro (art. 189) permite decisões interlocutórias em qualquer procedimento, incluindo tutela de urgência. Diferencia-se da tutela final pelo objeto (provisório vs definitivo) e momento (antes/depois da instrução). O video aborda a evolução histórica do order licensing nos EUA e sua aplicação no direito brasileiro.</p>
+                    <div class="video-links">
+                        <a href="https://www.youtube.com/watch?v=K32KqJiFTP4" target="_blank" class="video-btn video-btn-primary">Assistir no YouTube</a>
+                        <a href="https://docs.google.com/document/d/1p41wz0p74biR_w6IVD0IVYMrp37NR707vD2NWCwmXcI/edit" target="_blank" class="video-btn video-btn-secondary">Ver Transcrição</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Video 4 -->
+            <article class="video-card">
+                <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/TJ5ymcOQFDI/maxresdefault.jpg" alt="Microssistema de Tutela Coletiva" onerror="this.src='https://img.youtube.com/vi/TJ5ymcOQFDI/sddefault.jpg'">
+                </div>
+                <div class="video-content">
+                    <span class="video-number">04</span>
+                    <h3 class="video-title">Microssistema de Tutela Coletiva</h3>
+                    <span class="video-date">15 de fevereiro de 2026</span>
+                    <p class="video-summary">O video explica o microssistema de tutela coletiva no Brasil, fundado na CF/88 arts. 5º XXI e 129. Abrange 3 códigos: CDC (ação civil pública), Lei 7.347/85 (ações coletivas), CPC (art. 189). O sistema visa proteger direitos difusos (meio ambiente), coletivos (direitos de grupo) e individuais homogêneos (consumidores). Legitimados: MP, Defensoria, União, Estados, Municípios, associações. Competência: JF para danos a bens públicos.</p>
+                    <div class="video-links">
+                        <a href="https://www.youtube.com/watch?v=TJ5ymcOQFDI" target="_blank" class="video-btn video-btn-primary">Assistir no YouTube</a>
+                        <a href="https://docs.google.com/document/d/1p41wz0p74biR_w6IVD0IVYMrp37NR707vD2NWCwmXcI/edit" target="_blank" class="video-btn video-btn-secondary">Ver Transcrição</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Video 5 -->
+            <article class="video-card">
+                <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/JRDezm6Qqo8/maxresdefault.jpg" alt="Coisa Julgada no Processo Coletivo" onerror="this.src='https://img.youtube.com/vi/JRDezm6Qqo8/sddefault.jpg'">
+                </div>
+                <div class="video-content">
+                    <span class="video-number">05</span>
+                    <h3 class="video-title">Coisa Julgada no Processo Coletivo</h3>
+                    <span class="video-date">16 de fevereiro de 2026</span>
+                    <p class="video-summary">O video aborda o tema da coisa julgada no processo coletivo. A coisa julgada (art. 16 CDC) é a qualidade que torna a sentença imutável. No sistema brasileiro, há diferenças conforme o tipo de direito: para direitos difusos e coletivos, a sentença faz coisa julgada erga omnes (todos); para individuais homogêneos, subjúdice (limites da lide). A competência para ações coletivas é dividida: JF para União/autarquias, JE para Estado/Município (direitos difusos), JF/JE para individuais homogêneos.</p>
+                    <div class="video-links">
+                        <a href="https://www.youtube.com/watch?v=JRDezm6Qqo8" target="_blank" class="video-btn video-btn-primary">Assistir no YouTube</a>
+                        <a href="https://docs.google.com/document/d/13299FWaGZHg2R7hRZXPGbc1yqelsiAfpweeT1tQHTc8/edit" target="_blank" class="video-btn video-btn-secondary">Ver Transcrição</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Video 6 -->
+            <article class="video-card">
+                <div class="video-thumb">
+                    <img src="https://img.youtube.com/vi/DEdVtIWH8qM/maxresdefault.jpg" alt="Execução no Processo Coletivo" onerror="this.src='https://img.youtube.com/vi/DEdVtIWH8qM/sddefault.jpg'">
+                </div>
+                <div class="video-content">
+                    <span class="video-number">06</span>
+                    <h3 class="video-title">Execução no Processo Coletivo</h3>
+                    <span class="video-date">17 de fevereiro de 2026</span>
+                    <p class="video-summary">O video aborda a execução no processo coletivo. A execução pode ser individual (credor pode executar título executivo judicial ou extrajudicial) ou coletiva (execução civil para cumprimento de obrigações de fazer, não fazer ou dar). A competência para execução de decisões coletivas segue regras do art. 93 CDC: JF para União/autarquias, JE para Estado/Município. Há ainda a execução de obrigações individuais homogêneas derivadas de sentença coletiva.</p>
+                    <div class="video-links">
+                        <a href="https://www.youtube.com/watch?v=DEdVtIWH8qM" target="_blank" class="video-btn video-btn-primary">Assistir no YouTube</a>
+                        <a href="https://docs.google.com/document/d/14LowDgluSUnGDYY5WnKLBkxWR_Q3fMaqFH0kf6jx7-Q/edit" target="_blank" class="video-btn video-btn-secondary">Ver Transcrição</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>MP Diário © 2026 - Todos os direitos reservados</p>
+            <p>Direito Empresarial e Falimentar • Jurisprudência • Legislação</p>
+        </footer>
+    </div>
+</body>
+</html>
