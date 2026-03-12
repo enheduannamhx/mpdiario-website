@@ -1,0 +1,13 @@
+export { default as IcoBalanca } from './IcoBalanca';
+export { default as IcoDocumento } from './IcoDocumento';
+export { default as IcoEmail } from './IcoEmail';
+export { default as IcoTelefone } from './IcoTelefone';
+export { default as IcoLocalizacao } from './IcoLocalizacao';
+export { default as IcoUsuario } from './IcoUsuario';
+export { default as IcoMartelo } from './IcoMartelo';
+export { default as IcoLivro } from './IcoLivro';
+export { default as IcoMaleta } from './IcoMaleta';
+export { default as IcoCalendario } from './IcoCalendario';
+export { default as IcoCheck } from './IcoCheck';
+export { default as IcoSetaDireita } from './IcoSetaDireita';
+export { default as IcoLinkedin } from './IcoLinkedin';

@@ -1,17 +1,49 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;300;400;600&display=swap');
 
-/* MP Diário Design System */
+/* Design System v2 - Acessível e Minimalista */
 :root {
-  --color-midnight: #1a1c2c;
-  --color-navy: #2d3142;
-  --color-gold: #c9a227;
-  --color-cream: #f8f5f0;
-  --color-white: #ffffff;
-  --color-slate: #4a4e69;
-  --color-warm-gray: #9a8c98;
-  --color-border: #e8e4df;
+  /* Cores - Alto Contraste WCAG AA */
+  --color-midnight: #1A1A1A;
+  --color-navy: #2D2D2D;
+  --color-gold: #C9A227;
+  --color-cream: #F5F2ED;
+  --color-white: #FFFFFF;
+  --color-slate: #4A4A4A;
+  --color-warm-gray: #8A8A8A;
+  --color-border: #D4D4D4;
+  
+  /* Estados - Cores accesibles */
+  --color-success: #1A5F2A;
+  --color-error: #8B1A1A;
+  --color-info: #1A5F7A;
+  
+  /* Sombras com profundidade */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+  
+  /* Brilho direcionado (glow) */
+  --glow-gold: 0 0 20px rgba(201, 162, 39, 0.3);
+  --glow-midnight: 0 0 20px rgba(26, 26, 26, 0.2);
+  
+  /* Espaçamento */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  
+  /* Borders */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  
+  /* Transições */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 350ms ease;
 }
 
 * {
@@ -20,19 +52,19 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'Josefin Sans', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: var(--color-cream);
-}
-
-/* Smooth scroll */
 html {
   scroll-behavior: smooth;
 }
 
-/* Custom scrollbar */
+body {
+  font-family: 'Josefin Sans', sans-serif;
+  background-color: var(--color-cream);
+  color: var(--color-midnight);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -43,9 +75,32 @@ html {
 
 ::-webkit-scrollbar-thumb {
   background: var(--color-slate);
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-midnight);
+}
+
+/* Focus - Acessibilidade */
+*:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+/* Links */
+a {
+  color: var(--color-midnight);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  color: var(--color-gold);
+}
+
+/* Selection */
+::selection {
+  background: var(--color-gold);
+  color: var(--color-white);
 }
